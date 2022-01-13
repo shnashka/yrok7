@@ -6,10 +6,22 @@ import simple_draw as sd
 #  - создание снежинки с нужными параметрами
 #  - отработку изменений координат
 #  - отрисовку
+import random as r
+
+x = 1200
+y = 600
+sd.resolution = (x, y)
 
 
 class Snowflake:
-    pass
+    def __init__(self):
+        self.x = r(0, 1200)
+        self.y = r(550, 600)
+        self.sped = r(20, 100)
+        self.length = r(10, 60)
+        self.point = sd.get_point(self.x, self.y)
+
+
 
     # TODO здесь ваш код
 
