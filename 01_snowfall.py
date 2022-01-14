@@ -15,25 +15,38 @@ sd.resolution = (x, y)
 
 class Snowflake:
     def __init__(self):
-        self.x = r(0, 1200)
-        self.y = r(550, 600)
-        self.sped = r(20, 100)
-        self.length = r(10, 60)
+        self.x = r.randint(0, 1200)
+        self.y = r.randint(550, 600)
+        self.sped = r.randint(20, 100)
+        self.length = r.randint(10, 60)
         self.point = sd.get_point(self.x, self.y)
 
+    def edge(self):
+        if self.y <= 0:
+            return True
+
+    def movement(self):
+        self.point = sd.get_point(self.x, self.y)
+        self.y -= self.sped
+        sd.snowflake(center=self.point, length=self.length)
+        self.x += r.randint(-10, 10)
 
 
-    # TODO здесь ваш код
+def new_snowflake(N):
+    flakes_snowflakes = []
+    for i in range(N):
+        flakes_snowflakes.append(Snowflake())
+    return flakes_snowflakes
 
 
-flake = Snowflake()
+flakes = new_snowflake(100)
 
 while True:
-    flake.clear_previous_picture()
-    flake.move()
-    flake.draw()
-    if not flake.can_fall():
-        break
+    sd.clear_screen()
+    for flake in flakes:
+        flake.movement()
+    if flake.edge():
+        flake.__init__()
     sd.sleep(0.1)
     if sd.user_want_exit():
         break
