@@ -32,3 +32,14 @@ from random import randint
 # Им всем вместе так же надо прожить 365 дней.
 
 # (Можно определить критическое количество котов, которое может прокормить человек...)
+from termcolor import cprint
+class Man:
+
+    def __init__(self, name):
+        self.name = name
+        self.fullness = 50
+        self.house = None
+
+    def __str__(self):
+        return 'Я - {}, сытость {}'.format(self.name, self.fullness)
+
